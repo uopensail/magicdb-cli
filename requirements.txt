@@ -1,0 +1,9 @@
+mmh3==3.0.0
+grpcio==1.27.1
+numpy==1.21.0
+pandas==1.5.0
+pyarrow==6.0.1
+antlr4-python3-runtime==4.10
+etcd3==0.12.0
+awswrangler==2.18.0
+boto3==1.26.27
