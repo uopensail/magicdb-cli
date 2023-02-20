@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="magicdb",
-    version="1.0.5",
+    version="1.0.7",
     description="magicdb client cmd tool",
     license="License :: GPL 3",
     author="TimePi",
@@ -37,7 +37,7 @@ setup(
     scripts=[],
     entry_points={
         'console_scripts': [
-            'magicdb-cli = magicdb.magicdbcli:main'
+            'magicdbcli = magicdb.magicdbcli:main'
         ]
     },
     classifiers=[
