@@ -41,6 +41,7 @@ VARNAME=40
 STRING=41
 NUMBER=42
 WS=43
+K_LOAD=44
 ';'=1
 '.'=2
 '('=3

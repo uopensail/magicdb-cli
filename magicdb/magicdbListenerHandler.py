@@ -210,8 +210,8 @@ def parse(command: str, etcd_client: MagicDBEtcdClient):
 
 
 if __name__ == "__main__":
-    drop_database = "drop database if exists database1;"
-    create_database = 'create database if not exists database1 with properties("access_key" = "access_key","secret_key" = "secret_key","bucket"="bucket","endpoint"="endpoint","cloud"="s3","region"="region");'
+    drop_database = "DROP database if exists database1;"
+    create_database = 'create database if not exists database1 with properties("access_key" = "Access_key","secret_key" = "secret_key","bucket"="bucket","endpoint"="endpoint","cloud"="s3","region"="region");'
     show_databases = "show databases;"
     add_machine = 'alter database database1 add machine("10.0.0.3");'
     show_machines = "show machines database1;"
@@ -219,18 +219,18 @@ if __name__ == "__main__":
     del_machine_2 = 'alter database database1 drop machine("10.0.0.3");'
     show_tables_1 = "show tables database1;"
     show_tables_2 = "show tables database2;"
-    create_table = 'create table database1.table1 with properties("data_dir"="data_path","meta_dir"="meta_path", "key"="key";'
+    create_table = 'create table database1.table1 with properties("data_dir"="data_path","meta_dir"="meta_path", "key"="key");'
     drop_table = "drop table if exists database1.table1;"
 
     show_versions_1 = "show versions database1.table1;"
     show_versions_2 = "show versions database1.table2;"
     show_current_versions = "show current version database1.table1;"
-    load_data = 'load data "oss://xxxx/dt=20221124/" into table database1.table1 with PROPERTIES("k1" = "v1","k2" = "v2");'
+    load_data = 'Load data "oss://xxxx/dt=20221124/" into table database1.table1 with PROPERTIES("k1" = "v1","k2" = "v2");'
 
     drop_version_1 = 'alter table database1.table1 drop version("version1");'
     drop_version_2 = 'alter table database1.table1 drop version("version2");'
     desc_table = "desc database1.table1;"
-    etcd_client = MagicDBEtcdClient("test", "192.168.1.5", 2379)
+    etcd_client = MagicDBEtcdClient("test", "127.0.0.1", 2379)
 
     parse(drop_database, etcd_client)
     parse(show_databases, etcd_client)

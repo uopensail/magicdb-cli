@@ -16,6 +16,7 @@
 build/
 .idea/
 .vscode/
+.antlr/
 
 *__pycache__*
 *.egg-info

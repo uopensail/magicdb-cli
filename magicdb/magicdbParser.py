@@ -1,4 +1,4 @@
-# Generated from magicdb.g4 by ANTLR 4.10
+# Generated from magicdbParser.g4 by ANTLR 4.12.0
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,92 +10,85 @@ else:
 
 def serializedATN():
     return [
-        4,1,43,249,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,44,229,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
         1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,3,1,64,8,1,1,2,1,2,1,2,3,2,69,
-        8,2,1,3,1,3,1,3,1,3,3,3,75,8,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,5,1,
-        5,1,5,1,5,1,5,3,5,89,8,5,1,5,1,5,1,5,1,5,1,6,1,6,1,6,3,6,98,8,6,
-        1,7,1,7,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,9,
-        1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,3,10,129,
-        8,10,1,11,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,3,12,140,8,12,
-        1,12,1,12,1,12,1,13,1,13,1,13,1,13,1,13,3,13,150,8,13,1,13,1,13,
-        1,13,1,13,1,14,1,14,1,14,1,14,1,14,1,14,1,14,1,14,3,14,164,8,14,
-        1,15,1,15,1,15,1,15,3,15,170,8,15,1,16,1,16,1,16,1,16,1,16,1,17,
-        1,17,1,17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,
-        1,18,1,18,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,20,
-        1,20,1,20,1,20,1,20,1,20,1,20,3,20,210,8,20,1,20,1,20,1,21,1,21,
-        1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,22,1,22,1,22,1,22,1,22,
-        1,22,5,22,230,8,22,10,22,12,22,233,9,22,1,22,1,22,1,23,1,23,1,23,
-        1,23,1,24,1,24,1,25,1,25,1,25,1,25,1,26,1,26,1,26,0,0,27,0,2,4,6,
-        8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,
-        52,0,1,2,0,8,9,41,42,243,0,54,1,0,0,0,2,63,1,0,0,0,4,68,1,0,0,0,
-        6,70,1,0,0,0,8,79,1,0,0,0,10,83,1,0,0,0,12,97,1,0,0,0,14,99,1,0,
-        0,0,16,104,1,0,0,0,18,114,1,0,0,0,20,128,1,0,0,0,22,130,1,0,0,0,
-        24,135,1,0,0,0,26,144,1,0,0,0,28,163,1,0,0,0,30,169,1,0,0,0,32,171,
-        1,0,0,0,34,176,1,0,0,0,36,182,1,0,0,0,38,192,1,0,0,0,40,202,1,0,
-        0,0,42,213,1,0,0,0,44,223,1,0,0,0,46,236,1,0,0,0,48,240,1,0,0,0,
-        50,242,1,0,0,0,52,246,1,0,0,0,54,55,3,2,1,0,55,56,5,0,0,1,56,1,1,
-        0,0,0,57,64,3,4,2,0,58,64,3,12,6,0,59,64,3,20,10,0,60,64,3,30,15,
-        0,61,64,3,40,20,0,62,64,3,42,21,0,63,57,1,0,0,0,63,58,1,0,0,0,63,
-        59,1,0,0,0,63,60,1,0,0,0,63,61,1,0,0,0,63,62,1,0,0,0,64,3,1,0,0,
-        0,65,69,3,6,3,0,66,69,3,8,4,0,67,69,3,10,5,0,68,65,1,0,0,0,68,66,
-        1,0,0,0,68,67,1,0,0,0,69,5,1,0,0,0,70,71,5,12,0,0,71,74,5,13,0,0,
-        72,73,5,14,0,0,73,75,5,15,0,0,74,72,1,0,0,0,74,75,1,0,0,0,75,76,
-        1,0,0,0,76,77,3,48,24,0,77,78,5,1,0,0,78,7,1,0,0,0,79,80,5,16,0,
-        0,80,81,5,17,0,0,81,82,5,1,0,0,82,9,1,0,0,0,83,84,5,18,0,0,84,88,
-        5,13,0,0,85,86,5,14,0,0,86,87,5,19,0,0,87,89,5,15,0,0,88,85,1,0,
-        0,0,88,89,1,0,0,0,89,90,1,0,0,0,90,91,3,48,24,0,91,92,3,44,22,0,
-        92,93,5,1,0,0,93,11,1,0,0,0,94,98,3,14,7,0,95,98,3,16,8,0,96,98,
-        3,18,9,0,97,94,1,0,0,0,97,95,1,0,0,0,97,96,1,0,0,0,98,13,1,0,0,0,
-        99,100,5,16,0,0,100,101,5,20,0,0,101,102,3,48,24,0,102,103,5,1,0,
-        0,103,15,1,0,0,0,104,105,5,21,0,0,105,106,5,13,0,0,106,107,3,48,
-        24,0,107,108,5,12,0,0,108,109,5,24,0,0,109,110,5,2,0,0,110,111,5,
-        41,0,0,111,112,5,3,0,0,112,113,5,1,0,0,113,17,1,0,0,0,114,115,5,
-        21,0,0,115,116,5,13,0,0,116,117,3,48,24,0,117,118,5,25,0,0,118,119,
-        5,24,0,0,119,120,5,2,0,0,120,121,5,41,0,0,121,122,5,3,0,0,122,123,
-        5,1,0,0,123,19,1,0,0,0,124,129,3,22,11,0,125,129,3,24,12,0,126,129,
-        3,26,13,0,127,129,3,28,14,0,128,124,1,0,0,0,128,125,1,0,0,0,128,
-        126,1,0,0,0,128,127,1,0,0,0,129,21,1,0,0,0,130,131,5,16,0,0,131,
-        132,5,39,0,0,132,133,3,48,24,0,133,134,5,1,0,0,134,23,1,0,0,0,135,
-        136,5,12,0,0,136,139,5,26,0,0,137,138,5,14,0,0,138,140,5,15,0,0,
-        139,137,1,0,0,0,139,140,1,0,0,0,140,141,1,0,0,0,141,142,3,46,23,
-        0,142,143,5,1,0,0,143,25,1,0,0,0,144,145,5,18,0,0,145,149,5,26,0,
-        0,146,147,5,14,0,0,147,148,5,19,0,0,148,150,5,15,0,0,149,146,1,0,
-        0,0,149,150,1,0,0,0,150,151,1,0,0,0,151,152,3,46,23,0,152,153,3,
-        44,22,0,153,154,5,1,0,0,154,27,1,0,0,0,155,156,5,27,0,0,156,157,
-        3,46,23,0,157,158,5,1,0,0,158,164,1,0,0,0,159,160,5,28,0,0,160,161,
-        3,46,23,0,161,162,5,1,0,0,162,164,1,0,0,0,163,155,1,0,0,0,163,159,
-        1,0,0,0,164,29,1,0,0,0,165,170,3,32,16,0,166,170,3,34,17,0,167,170,
-        3,36,18,0,168,170,3,38,19,0,169,165,1,0,0,0,169,166,1,0,0,0,169,
-        167,1,0,0,0,169,168,1,0,0,0,170,31,1,0,0,0,171,172,5,16,0,0,172,
-        173,5,29,0,0,173,174,3,46,23,0,174,175,5,1,0,0,175,33,1,0,0,0,176,
-        177,5,16,0,0,177,178,5,23,0,0,178,179,5,30,0,0,179,180,3,46,23,0,
-        180,181,5,1,0,0,181,35,1,0,0,0,182,183,5,22,0,0,183,184,5,26,0,0,
-        184,185,3,46,23,0,185,186,5,31,0,0,186,187,5,23,0,0,187,188,5,30,
-        0,0,188,189,5,4,0,0,189,190,5,41,0,0,190,191,5,1,0,0,191,37,1,0,
-        0,0,192,193,5,21,0,0,193,194,5,26,0,0,194,195,3,46,23,0,195,196,
-        5,12,0,0,196,197,5,30,0,0,197,198,5,2,0,0,198,199,5,41,0,0,199,200,
-        5,3,0,0,200,201,5,1,0,0,201,39,1,0,0,0,202,203,5,32,0,0,203,204,
-        5,33,0,0,204,205,5,41,0,0,205,206,5,34,0,0,206,207,5,26,0,0,207,
-        209,3,46,23,0,208,210,3,44,22,0,209,208,1,0,0,0,209,210,1,0,0,0,
-        210,211,1,0,0,0,211,212,5,1,0,0,212,41,1,0,0,0,213,214,5,35,0,0,
-        214,215,5,5,0,0,215,216,5,36,0,0,216,217,3,46,23,0,217,218,5,37,
-        0,0,218,219,5,40,0,0,219,220,5,4,0,0,220,221,5,41,0,0,221,222,5,
-        1,0,0,222,43,1,0,0,0,223,224,5,11,0,0,224,225,5,10,0,0,225,226,5,
-        2,0,0,226,231,3,50,25,0,227,228,5,6,0,0,228,230,3,50,25,0,229,227,
-        1,0,0,0,230,233,1,0,0,0,231,229,1,0,0,0,231,232,1,0,0,0,232,234,
-        1,0,0,0,233,231,1,0,0,0,234,235,5,3,0,0,235,45,1,0,0,0,236,237,5,
-        40,0,0,237,238,5,7,0,0,238,239,5,40,0,0,239,47,1,0,0,0,240,241,5,
-        40,0,0,241,49,1,0,0,0,242,243,5,41,0,0,243,244,5,4,0,0,244,245,3,
-        52,26,0,245,51,1,0,0,0,246,247,7,0,0,0,247,53,1,0,0,0,12,63,68,74,
-        88,97,128,139,149,163,169,209,231
+        8,2,1,3,1,3,1,3,1,3,3,3,75,8,3,1,3,1,3,1,4,1,4,1,4,1,5,1,5,1,5,1,
+        5,1,5,3,5,87,8,5,1,5,1,5,1,5,1,6,1,6,1,6,3,6,95,8,6,1,7,1,7,1,7,
+        1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,9,1,9,1,9,
+        1,9,1,9,1,9,1,10,1,10,1,10,1,10,3,10,123,8,10,1,11,1,11,1,11,1,11,
+        1,12,1,12,1,12,1,12,3,12,133,8,12,1,12,1,12,1,13,1,13,1,13,1,13,
+        1,13,3,13,142,8,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,3,14,151,8,
+        14,1,15,1,15,1,15,1,15,3,15,157,8,15,1,16,1,16,1,16,1,16,1,17,1,
+        17,1,17,1,17,1,17,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,18,1,
+        19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,19,1,20,1,20,1,20,1,20,1,
+        20,1,20,1,20,3,20,193,8,20,1,21,1,21,1,21,1,21,1,21,1,21,1,21,1,
+        21,1,21,1,22,1,22,1,22,1,22,1,22,1,22,5,22,210,8,22,10,22,12,22,
+        213,9,22,1,22,1,22,1,23,1,23,1,23,1,23,1,24,1,24,1,25,1,25,1,25,
+        1,25,1,26,1,26,1,26,0,0,27,0,2,4,6,8,10,12,14,16,18,20,22,24,26,
+        28,30,32,34,36,38,40,42,44,46,48,50,52,0,1,2,0,38,39,41,42,223,0,
+        54,1,0,0,0,2,63,1,0,0,0,4,68,1,0,0,0,6,70,1,0,0,0,8,78,1,0,0,0,10,
+        81,1,0,0,0,12,94,1,0,0,0,14,96,1,0,0,0,16,100,1,0,0,0,18,109,1,0,
+        0,0,20,122,1,0,0,0,22,124,1,0,0,0,24,128,1,0,0,0,26,136,1,0,0,0,
+        28,150,1,0,0,0,30,156,1,0,0,0,32,158,1,0,0,0,34,162,1,0,0,0,36,167,
+        1,0,0,0,38,176,1,0,0,0,40,185,1,0,0,0,42,194,1,0,0,0,44,203,1,0,
+        0,0,46,216,1,0,0,0,48,220,1,0,0,0,50,222,1,0,0,0,52,226,1,0,0,0,
+        54,55,3,2,1,0,55,56,5,0,0,1,56,1,1,0,0,0,57,64,3,4,2,0,58,64,3,12,
+        6,0,59,64,3,20,10,0,60,64,3,30,15,0,61,64,3,40,20,0,62,64,3,42,21,
+        0,63,57,1,0,0,0,63,58,1,0,0,0,63,59,1,0,0,0,63,60,1,0,0,0,63,61,
+        1,0,0,0,63,62,1,0,0,0,64,3,1,0,0,0,65,69,3,6,3,0,66,69,3,8,4,0,67,
+        69,3,10,5,0,68,65,1,0,0,0,68,66,1,0,0,0,68,67,1,0,0,0,69,5,1,0,0,
+        0,70,71,5,10,0,0,71,74,5,11,0,0,72,73,5,12,0,0,73,75,5,13,0,0,74,
+        72,1,0,0,0,74,75,1,0,0,0,75,76,1,0,0,0,76,77,3,48,24,0,77,7,1,0,
+        0,0,78,79,5,14,0,0,79,80,5,15,0,0,80,9,1,0,0,0,81,82,5,16,0,0,82,
+        86,5,11,0,0,83,84,5,12,0,0,84,85,5,17,0,0,85,87,5,13,0,0,86,83,1,
+        0,0,0,86,87,1,0,0,0,87,88,1,0,0,0,88,89,3,48,24,0,89,90,3,44,22,
+        0,90,11,1,0,0,0,91,95,3,14,7,0,92,95,3,16,8,0,93,95,3,18,9,0,94,
+        91,1,0,0,0,94,92,1,0,0,0,94,93,1,0,0,0,95,13,1,0,0,0,96,97,5,14,
+        0,0,97,98,5,18,0,0,98,99,3,48,24,0,99,15,1,0,0,0,100,101,5,19,0,
+        0,101,102,5,11,0,0,102,103,3,48,24,0,103,104,5,10,0,0,104,105,5,
+        22,0,0,105,106,5,3,0,0,106,107,5,41,0,0,107,108,5,4,0,0,108,17,1,
+        0,0,0,109,110,5,19,0,0,110,111,5,11,0,0,111,112,3,48,24,0,112,113,
+        5,23,0,0,113,114,5,22,0,0,114,115,5,3,0,0,115,116,5,41,0,0,116,117,
+        5,4,0,0,117,19,1,0,0,0,118,123,3,22,11,0,119,123,3,24,12,0,120,123,
+        3,26,13,0,121,123,3,28,14,0,122,118,1,0,0,0,122,119,1,0,0,0,122,
+        120,1,0,0,0,122,121,1,0,0,0,123,21,1,0,0,0,124,125,5,14,0,0,125,
+        126,5,37,0,0,126,127,3,48,24,0,127,23,1,0,0,0,128,129,5,10,0,0,129,
+        132,5,24,0,0,130,131,5,12,0,0,131,133,5,13,0,0,132,130,1,0,0,0,132,
+        133,1,0,0,0,133,134,1,0,0,0,134,135,3,46,23,0,135,25,1,0,0,0,136,
+        137,5,16,0,0,137,141,5,24,0,0,138,139,5,12,0,0,139,140,5,17,0,0,
+        140,142,5,13,0,0,141,138,1,0,0,0,141,142,1,0,0,0,142,143,1,0,0,0,
+        143,144,3,46,23,0,144,145,3,44,22,0,145,27,1,0,0,0,146,147,5,25,
+        0,0,147,151,3,46,23,0,148,149,5,26,0,0,149,151,3,46,23,0,150,146,
+        1,0,0,0,150,148,1,0,0,0,151,29,1,0,0,0,152,157,3,32,16,0,153,157,
+        3,34,17,0,154,157,3,36,18,0,155,157,3,38,19,0,156,152,1,0,0,0,156,
+        153,1,0,0,0,156,154,1,0,0,0,156,155,1,0,0,0,157,31,1,0,0,0,158,159,
+        5,14,0,0,159,160,5,27,0,0,160,161,3,46,23,0,161,33,1,0,0,0,162,163,
+        5,14,0,0,163,164,5,21,0,0,164,165,5,28,0,0,165,166,3,46,23,0,166,
+        35,1,0,0,0,167,168,5,20,0,0,168,169,5,24,0,0,169,170,3,46,23,0,170,
+        171,5,29,0,0,171,172,5,21,0,0,172,173,5,28,0,0,173,174,5,6,0,0,174,
+        175,5,41,0,0,175,37,1,0,0,0,176,177,5,19,0,0,177,178,5,24,0,0,178,
+        179,3,46,23,0,179,180,5,10,0,0,180,181,5,28,0,0,181,182,5,3,0,0,
+        182,183,5,41,0,0,183,184,5,4,0,0,184,39,1,0,0,0,185,186,5,44,0,0,
+        186,187,5,31,0,0,187,188,5,41,0,0,188,189,5,32,0,0,189,190,5,24,
+        0,0,190,192,3,46,23,0,191,193,3,44,22,0,192,191,1,0,0,0,192,193,
+        1,0,0,0,193,41,1,0,0,0,194,195,5,33,0,0,195,196,5,7,0,0,196,197,
+        5,34,0,0,197,198,3,46,23,0,198,199,5,35,0,0,199,200,5,40,0,0,200,
+        201,5,6,0,0,201,202,5,41,0,0,202,43,1,0,0,0,203,204,5,9,0,0,204,
+        205,5,8,0,0,205,206,5,3,0,0,206,211,3,50,25,0,207,208,5,5,0,0,208,
+        210,3,50,25,0,209,207,1,0,0,0,210,213,1,0,0,0,211,209,1,0,0,0,211,
+        212,1,0,0,0,212,214,1,0,0,0,213,211,1,0,0,0,214,215,5,4,0,0,215,
+        45,1,0,0,0,216,217,5,40,0,0,217,218,5,2,0,0,218,219,5,40,0,0,219,
+        47,1,0,0,0,220,221,5,40,0,0,221,49,1,0,0,0,222,223,5,41,0,0,223,
+        224,5,6,0,0,224,225,3,52,26,0,225,51,1,0,0,0,226,227,7,0,0,0,227,
+        53,1,0,0,0,12,63,68,74,86,94,122,132,141,150,156,192,211
     ]
 
 class magicdbParser ( Parser ):
 
-    grammarFileName = "magicdb.g4"
+    grammarFileName = "magicdbParser.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -103,17 +96,23 @@ class magicdbParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "';'", "'('", "')'", "'='", "'*'", "','", 
-                     "'.'", "'true'", "'false'" ]
+    literalNames = [ "<INVALID>", "';'", "'.'", "'('", "')'", "','", "'='", 
+                     "'*'", "'PROPERTIES'", "'WITH'", "'DROP'", "'DATABASE'", 
+                     "'IF'", "'EXISTS'", "'SHOW'", "<INVALID>", "'CREATE'", 
+                     "'NOT'", "'MACHINES'", "'ALTER'", "'UPDATE'", "'CURRENT'", 
+                     "'MACHINE'", "'ADD'", "'TABLE'", "'DESC'", "'DESCRIBE'", 
+                     "'VERSIONS'", "'VERSION'", "'SET'", "'LOAD'", "'DATA'", 
+                     "'INTO'", "'SELECT'", "'FROM'", "'WHERE'", "'KEY'", 
+                     "'TABLES'", "'TRUE'", "'FALSE'" ]
 
-    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "PROPERTIES", "WITH", "DROP", 
+    symbolicNames = [ "<INVALID>", "SCOL", "DOT", "OPEN_PAR", "CLOSE_PAR", 
+                      "COMMA", "ASSIGN", "STAR", "PROPERTIES", "WITH", "DROP", 
                       "DATABASE", "IF", "EXISTS", "SHOW", "DATABASES", "CREATE", 
                       "NOT", "MACHINES", "ALTER", "UPDATE", "CURRENT", "MACHINE", 
                       "ADD", "TABLE", "DESC", "DESCRIBE", "VERSIONS", "VERSION", 
                       "SET", "LOAD", "DATA", "INTO", "SELECT", "FROM", "WHERE", 
-                      "KEY", "TABLES", "VARNAME", "STRING", "NUMBER", "WS" ]
+                      "KEY", "TABLES", "TRUE", "FALSE", "VARNAME", "STRING", 
+                      "NUMBER", "WS", "K_LOAD" ]
 
     RULE_start = 0
     RULE_command = 1
@@ -152,53 +151,54 @@ class magicdbParser ( Parser ):
                    "table", "database_name", "pair", "value" ]
 
     EOF = Token.EOF
-    T__0=1
-    T__1=2
-    T__2=3
-    T__3=4
-    T__4=5
-    T__5=6
-    T__6=7
-    T__7=8
-    T__8=9
-    PROPERTIES=10
-    WITH=11
-    DROP=12
-    DATABASE=13
-    IF=14
-    EXISTS=15
-    SHOW=16
-    DATABASES=17
-    CREATE=18
-    NOT=19
-    MACHINES=20
-    ALTER=21
-    UPDATE=22
-    CURRENT=23
-    MACHINE=24
-    ADD=25
-    TABLE=26
-    DESC=27
-    DESCRIBE=28
-    VERSIONS=29
-    VERSION=30
-    SET=31
-    LOAD=32
-    DATA=33
-    INTO=34
-    SELECT=35
-    FROM=36
-    WHERE=37
-    KEY=38
-    TABLES=39
+    SCOL=1
+    DOT=2
+    OPEN_PAR=3
+    CLOSE_PAR=4
+    COMMA=5
+    ASSIGN=6
+    STAR=7
+    PROPERTIES=8
+    WITH=9
+    DROP=10
+    DATABASE=11
+    IF=12
+    EXISTS=13
+    SHOW=14
+    DATABASES=15
+    CREATE=16
+    NOT=17
+    MACHINES=18
+    ALTER=19
+    UPDATE=20
+    CURRENT=21
+    MACHINE=22
+    ADD=23
+    TABLE=24
+    DESC=25
+    DESCRIBE=26
+    VERSIONS=27
+    VERSION=28
+    SET=29
+    LOAD=30
+    DATA=31
+    INTO=32
+    SELECT=33
+    FROM=34
+    WHERE=35
+    KEY=36
+    TABLES=37
+    TRUE=38
+    FALSE=39
     VARNAME=40
     STRING=41
     NUMBER=42
     WS=43
+    K_LOAD=44
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.10")
+        self.checkVersion("4.12.0")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -392,17 +392,17 @@ class magicdbParser ( Parser ):
             self.state = 68
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [magicdbParser.DROP]:
+            if token in [10]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 65
                 self.drop_database()
                 pass
-            elif token in [magicdbParser.SHOW]:
+            elif token in [14]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 66
                 self.show_databases()
                 pass
-            elif token in [magicdbParser.CREATE]:
+            elif token in [16]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 67
                 self.create_database()
@@ -470,7 +470,7 @@ class magicdbParser ( Parser ):
             self.state = 74
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==magicdbParser.IF:
+            if _la==12:
                 self.state = 72
                 self.match(magicdbParser.IF)
                 self.state = 73
@@ -479,8 +479,6 @@ class magicdbParser ( Parser ):
 
             self.state = 76
             self.database_name()
-            self.state = 77
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -523,12 +521,10 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_show_databases)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 79
+            self.state = 78
             self.match(magicdbParser.SHOW)
-            self.state = 80
+            self.state = 79
             self.match(magicdbParser.DATABASES)
-            self.state = 81
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -589,28 +585,26 @@ class magicdbParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 83
+            self.state = 81
             self.match(magicdbParser.CREATE)
-            self.state = 84
+            self.state = 82
             self.match(magicdbParser.DATABASE)
-            self.state = 88
+            self.state = 86
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==magicdbParser.IF:
-                self.state = 85
+            if _la==12:
+                self.state = 83
                 self.match(magicdbParser.IF)
-                self.state = 86
+                self.state = 84
                 self.match(magicdbParser.NOT)
-                self.state = 87
+                self.state = 85
                 self.match(magicdbParser.EXISTS)
 
 
-            self.state = 90
+            self.state = 88
             self.database_name()
-            self.state = 91
+            self.state = 89
             self.properties()
-            self.state = 92
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -658,24 +652,24 @@ class magicdbParser ( Parser ):
         localctx = magicdbParser.Machine_cmdContext(self, self._ctx, self.state)
         self.enterRule(localctx, 12, self.RULE_machine_cmd)
         try:
-            self.state = 97
+            self.state = 94
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 94
+                self.state = 91
                 self.show_machines()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 95
+                self.state = 92
                 self.delete_machine()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 96
+                self.state = 93
                 self.add_machine()
                 pass
 
@@ -726,14 +720,12 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_show_machines)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 99
+            self.state = 96
             self.match(magicdbParser.SHOW)
-            self.state = 100
+            self.state = 97
             self.match(magicdbParser.MACHINES)
-            self.state = 101
+            self.state = 98
             self.database_name()
-            self.state = 102
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -766,8 +758,14 @@ class magicdbParser ( Parser ):
         def MACHINE(self):
             return self.getToken(magicdbParser.MACHINE, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(magicdbParser.OPEN_PAR, 0)
+
         def STRING(self):
             return self.getToken(magicdbParser.STRING, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(magicdbParser.CLOSE_PAR, 0)
 
         def getRuleIndex(self):
             return magicdbParser.RULE_delete_machine
@@ -789,24 +787,22 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_delete_machine)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 104
+            self.state = 100
             self.match(magicdbParser.ALTER)
-            self.state = 105
+            self.state = 101
             self.match(magicdbParser.DATABASE)
-            self.state = 106
+            self.state = 102
             self.database_name()
-            self.state = 107
+            self.state = 103
             self.match(magicdbParser.DROP)
-            self.state = 108
+            self.state = 104
             self.match(magicdbParser.MACHINE)
-            self.state = 109
-            self.match(magicdbParser.T__1)
-            self.state = 110
+            self.state = 105
+            self.match(magicdbParser.OPEN_PAR)
+            self.state = 106
             self.match(magicdbParser.STRING)
-            self.state = 111
-            self.match(magicdbParser.T__2)
-            self.state = 112
-            self.match(magicdbParser.T__0)
+            self.state = 107
+            self.match(magicdbParser.CLOSE_PAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -839,8 +835,14 @@ class magicdbParser ( Parser ):
         def MACHINE(self):
             return self.getToken(magicdbParser.MACHINE, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(magicdbParser.OPEN_PAR, 0)
+
         def STRING(self):
             return self.getToken(magicdbParser.STRING, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(magicdbParser.CLOSE_PAR, 0)
 
         def getRuleIndex(self):
             return magicdbParser.RULE_add_machine
@@ -862,24 +864,22 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 18, self.RULE_add_machine)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 114
+            self.state = 109
             self.match(magicdbParser.ALTER)
-            self.state = 115
+            self.state = 110
             self.match(magicdbParser.DATABASE)
-            self.state = 116
+            self.state = 111
             self.database_name()
-            self.state = 117
+            self.state = 112
             self.match(magicdbParser.ADD)
-            self.state = 118
+            self.state = 113
             self.match(magicdbParser.MACHINE)
-            self.state = 119
-            self.match(magicdbParser.T__1)
-            self.state = 120
+            self.state = 114
+            self.match(magicdbParser.OPEN_PAR)
+            self.state = 115
             self.match(magicdbParser.STRING)
-            self.state = 121
-            self.match(magicdbParser.T__2)
-            self.state = 122
-            self.match(magicdbParser.T__0)
+            self.state = 116
+            self.match(magicdbParser.CLOSE_PAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -931,27 +931,27 @@ class magicdbParser ( Parser ):
         localctx = magicdbParser.Table_cmdContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_table_cmd)
         try:
-            self.state = 128
+            self.state = 122
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [magicdbParser.SHOW]:
+            if token in [14]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 124
+                self.state = 118
                 self.show_tables()
                 pass
-            elif token in [magicdbParser.DROP]:
+            elif token in [10]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 125
+                self.state = 119
                 self.drop_table()
                 pass
-            elif token in [magicdbParser.CREATE]:
+            elif token in [16]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 126
+                self.state = 120
                 self.create_table()
                 pass
-            elif token in [magicdbParser.DESC, magicdbParser.DESCRIBE]:
+            elif token in [25, 26]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 127
+                self.state = 121
                 self.desc_table()
                 pass
             else:
@@ -1003,14 +1003,12 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 22, self.RULE_show_tables)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 130
+            self.state = 124
             self.match(magicdbParser.SHOW)
-            self.state = 131
+            self.state = 125
             self.match(magicdbParser.TABLES)
-            self.state = 132
+            self.state = 126
             self.database_name()
-            self.state = 133
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1064,24 +1062,22 @@ class magicdbParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 135
+            self.state = 128
             self.match(magicdbParser.DROP)
-            self.state = 136
+            self.state = 129
             self.match(magicdbParser.TABLE)
-            self.state = 139
+            self.state = 132
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==magicdbParser.IF:
-                self.state = 137
+            if _la==12:
+                self.state = 130
                 self.match(magicdbParser.IF)
-                self.state = 138
+                self.state = 131
                 self.match(magicdbParser.EXISTS)
 
 
-            self.state = 141
+            self.state = 134
             self.table()
-            self.state = 142
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1142,28 +1138,26 @@ class magicdbParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 144
+            self.state = 136
             self.match(magicdbParser.CREATE)
-            self.state = 145
+            self.state = 137
             self.match(magicdbParser.TABLE)
-            self.state = 149
+            self.state = 141
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==magicdbParser.IF:
-                self.state = 146
+            if _la==12:
+                self.state = 138
                 self.match(magicdbParser.IF)
-                self.state = 147
+                self.state = 139
                 self.match(magicdbParser.NOT)
-                self.state = 148
+                self.state = 140
                 self.match(magicdbParser.EXISTS)
 
 
-            self.state = 151
+            self.state = 143
             self.table()
-            self.state = 152
+            self.state = 144
             self.properties()
-            self.state = 153
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1209,26 +1203,22 @@ class magicdbParser ( Parser ):
         localctx = magicdbParser.Desc_tableContext(self, self._ctx, self.state)
         self.enterRule(localctx, 28, self.RULE_desc_table)
         try:
-            self.state = 163
+            self.state = 150
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [magicdbParser.DESC]:
+            if token in [25]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 155
+                self.state = 146
                 self.match(magicdbParser.DESC)
-                self.state = 156
+                self.state = 147
                 self.table()
-                self.state = 157
-                self.match(magicdbParser.T__0)
                 pass
-            elif token in [magicdbParser.DESCRIBE]:
+            elif token in [26]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 159
+                self.state = 148
                 self.match(magicdbParser.DESCRIBE)
-                self.state = 160
+                self.state = 149
                 self.table()
-                self.state = 161
-                self.match(magicdbParser.T__0)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1284,30 +1274,30 @@ class magicdbParser ( Parser ):
         localctx = magicdbParser.Version_cmdContext(self, self._ctx, self.state)
         self.enterRule(localctx, 30, self.RULE_version_cmd)
         try:
-            self.state = 169
+            self.state = 156
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 165
+                self.state = 152
                 self.show_versions()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 166
+                self.state = 153
                 self.show_current_version()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 167
+                self.state = 154
                 self.update_version()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 168
+                self.state = 155
                 self.drop_version()
                 pass
 
@@ -1358,14 +1348,12 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 32, self.RULE_show_versions)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 171
+            self.state = 158
             self.match(magicdbParser.SHOW)
-            self.state = 172
+            self.state = 159
             self.match(magicdbParser.VERSIONS)
-            self.state = 173
+            self.state = 160
             self.table()
-            self.state = 174
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1415,16 +1403,14 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 34, self.RULE_show_current_version)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 176
+            self.state = 162
             self.match(magicdbParser.SHOW)
-            self.state = 177
+            self.state = 163
             self.match(magicdbParser.CURRENT)
-            self.state = 178
+            self.state = 164
             self.match(magicdbParser.VERSION)
-            self.state = 179
+            self.state = 165
             self.table()
-            self.state = 180
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1460,6 +1446,9 @@ class magicdbParser ( Parser ):
         def VERSION(self):
             return self.getToken(magicdbParser.VERSION, 0)
 
+        def ASSIGN(self):
+            return self.getToken(magicdbParser.ASSIGN, 0)
+
         def STRING(self):
             return self.getToken(magicdbParser.STRING, 0)
 
@@ -1483,24 +1472,22 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 36, self.RULE_update_version)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 182
+            self.state = 167
             self.match(magicdbParser.UPDATE)
-            self.state = 183
+            self.state = 168
             self.match(magicdbParser.TABLE)
-            self.state = 184
+            self.state = 169
             self.table()
-            self.state = 185
+            self.state = 170
             self.match(magicdbParser.SET)
-            self.state = 186
+            self.state = 171
             self.match(magicdbParser.CURRENT)
-            self.state = 187
+            self.state = 172
             self.match(magicdbParser.VERSION)
-            self.state = 188
-            self.match(magicdbParser.T__3)
-            self.state = 189
+            self.state = 173
+            self.match(magicdbParser.ASSIGN)
+            self.state = 174
             self.match(magicdbParser.STRING)
-            self.state = 190
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1533,8 +1520,14 @@ class magicdbParser ( Parser ):
         def VERSION(self):
             return self.getToken(magicdbParser.VERSION, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(magicdbParser.OPEN_PAR, 0)
+
         def STRING(self):
             return self.getToken(magicdbParser.STRING, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(magicdbParser.CLOSE_PAR, 0)
 
         def getRuleIndex(self):
             return magicdbParser.RULE_drop_version
@@ -1556,24 +1549,22 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_drop_version)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 192
+            self.state = 176
             self.match(magicdbParser.ALTER)
-            self.state = 193
+            self.state = 177
             self.match(magicdbParser.TABLE)
-            self.state = 194
+            self.state = 178
             self.table()
-            self.state = 195
+            self.state = 179
             self.match(magicdbParser.DROP)
-            self.state = 196
+            self.state = 180
             self.match(magicdbParser.VERSION)
-            self.state = 197
-            self.match(magicdbParser.T__1)
-            self.state = 198
+            self.state = 181
+            self.match(magicdbParser.OPEN_PAR)
+            self.state = 182
             self.match(magicdbParser.STRING)
-            self.state = 199
-            self.match(magicdbParser.T__2)
-            self.state = 200
-            self.match(magicdbParser.T__0)
+            self.state = 183
+            self.match(magicdbParser.CLOSE_PAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1590,8 +1581,8 @@ class magicdbParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def LOAD(self):
-            return self.getToken(magicdbParser.LOAD, 0)
+        def K_LOAD(self):
+            return self.getToken(magicdbParser.K_LOAD, 0)
 
         def DATA(self):
             return self.getToken(magicdbParser.DATA, 0)
@@ -1634,28 +1625,26 @@ class magicdbParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 202
-            self.match(magicdbParser.LOAD)
-            self.state = 203
+            self.state = 185
+            self.match(magicdbParser.K_LOAD)
+            self.state = 186
             self.match(magicdbParser.DATA)
-            self.state = 204
+            self.state = 187
             self.match(magicdbParser.STRING)
-            self.state = 205
+            self.state = 188
             self.match(magicdbParser.INTO)
-            self.state = 206
+            self.state = 189
             self.match(magicdbParser.TABLE)
-            self.state = 207
+            self.state = 190
             self.table()
-            self.state = 209
+            self.state = 192
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==magicdbParser.WITH:
-                self.state = 208
+            if _la==9:
+                self.state = 191
                 self.properties()
 
 
-            self.state = 211
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1675,6 +1664,9 @@ class magicdbParser ( Parser ):
         def SELECT(self):
             return self.getToken(magicdbParser.SELECT, 0)
 
+        def STAR(self):
+            return self.getToken(magicdbParser.STAR, 0)
+
         def FROM(self):
             return self.getToken(magicdbParser.FROM, 0)
 
@@ -1687,6 +1679,9 @@ class magicdbParser ( Parser ):
 
         def VARNAME(self):
             return self.getToken(magicdbParser.VARNAME, 0)
+
+        def ASSIGN(self):
+            return self.getToken(magicdbParser.ASSIGN, 0)
 
         def STRING(self):
             return self.getToken(magicdbParser.STRING, 0)
@@ -1711,24 +1706,22 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 42, self.RULE_select_data)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 213
+            self.state = 194
             self.match(magicdbParser.SELECT)
-            self.state = 214
-            self.match(magicdbParser.T__4)
-            self.state = 215
+            self.state = 195
+            self.match(magicdbParser.STAR)
+            self.state = 196
             self.match(magicdbParser.FROM)
-            self.state = 216
+            self.state = 197
             self.table()
-            self.state = 217
+            self.state = 198
             self.match(magicdbParser.WHERE)
-            self.state = 218
+            self.state = 199
             self.match(magicdbParser.VARNAME)
-            self.state = 219
-            self.match(magicdbParser.T__3)
-            self.state = 220
+            self.state = 200
+            self.match(magicdbParser.ASSIGN)
+            self.state = 201
             self.match(magicdbParser.STRING)
-            self.state = 221
-            self.match(magicdbParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1751,12 +1744,24 @@ class magicdbParser ( Parser ):
         def PROPERTIES(self):
             return self.getToken(magicdbParser.PROPERTIES, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(magicdbParser.OPEN_PAR, 0)
+
         def pair(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(magicdbParser.PairContext)
             else:
                 return self.getTypedRuleContext(magicdbParser.PairContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(magicdbParser.CLOSE_PAR, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(magicdbParser.COMMA)
+            else:
+                return self.getToken(magicdbParser.COMMA, i)
 
         def getRuleIndex(self):
             return magicdbParser.RULE_properties
@@ -1779,28 +1784,28 @@ class magicdbParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 223
+            self.state = 203
             self.match(magicdbParser.WITH)
-            self.state = 224
+            self.state = 204
             self.match(magicdbParser.PROPERTIES)
-            self.state = 225
-            self.match(magicdbParser.T__1)
-            self.state = 226
+            self.state = 205
+            self.match(magicdbParser.OPEN_PAR)
+            self.state = 206
             self.pair()
-            self.state = 231
+            self.state = 211
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==magicdbParser.T__5:
-                self.state = 227
-                self.match(magicdbParser.T__5)
-                self.state = 228
+            while _la==5:
+                self.state = 207
+                self.match(magicdbParser.COMMA)
+                self.state = 208
                 self.pair()
-                self.state = 233
+                self.state = 213
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 234
-            self.match(magicdbParser.T__2)
+            self.state = 214
+            self.match(magicdbParser.CLOSE_PAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1823,6 +1828,9 @@ class magicdbParser ( Parser ):
             else:
                 return self.getToken(magicdbParser.VARNAME, i)
 
+        def DOT(self):
+            return self.getToken(magicdbParser.DOT, 0)
+
         def getRuleIndex(self):
             return magicdbParser.RULE_table
 
@@ -1843,11 +1851,11 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 46, self.RULE_table)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 236
+            self.state = 216
             self.match(magicdbParser.VARNAME)
-            self.state = 237
-            self.match(magicdbParser.T__6)
-            self.state = 238
+            self.state = 217
+            self.match(magicdbParser.DOT)
+            self.state = 218
             self.match(magicdbParser.VARNAME)
         except RecognitionException as re:
             localctx.exception = re
@@ -1888,7 +1896,7 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 48, self.RULE_database_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 240
+            self.state = 220
             self.match(magicdbParser.VARNAME)
         except RecognitionException as re:
             localctx.exception = re
@@ -1908,6 +1916,9 @@ class magicdbParser ( Parser ):
 
         def STRING(self):
             return self.getToken(magicdbParser.STRING, 0)
+
+        def ASSIGN(self):
+            return self.getToken(magicdbParser.ASSIGN, 0)
 
         def value(self):
             return self.getTypedRuleContext(magicdbParser.ValueContext,0)
@@ -1933,11 +1944,11 @@ class magicdbParser ( Parser ):
         self.enterRule(localctx, 50, self.RULE_pair)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 242
+            self.state = 222
             self.match(magicdbParser.STRING)
-            self.state = 243
-            self.match(magicdbParser.T__3)
-            self.state = 244
+            self.state = 223
+            self.match(magicdbParser.ASSIGN)
+            self.state = 224
             self.value()
         except RecognitionException as re:
             localctx.exception = re
@@ -1961,6 +1972,12 @@ class magicdbParser ( Parser ):
         def NUMBER(self):
             return self.getToken(magicdbParser.NUMBER, 0)
 
+        def TRUE(self):
+            return self.getToken(magicdbParser.TRUE, 0)
+
+        def FALSE(self):
+            return self.getToken(magicdbParser.FALSE, 0)
+
         def getRuleIndex(self):
             return magicdbParser.RULE_value
 
@@ -1982,9 +1999,9 @@ class magicdbParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 246
+            self.state = 226
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << magicdbParser.T__7) | (1 << magicdbParser.T__8) | (1 << magicdbParser.STRING) | (1 << magicdbParser.NUMBER))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 7421703487488) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
