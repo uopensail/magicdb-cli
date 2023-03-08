@@ -15,17 +15,17 @@ class MagicDBEtcdClient:
         self.client = etcd3.Etcd3Client(
             host=host, port=port, password=passwd, timeout=5)
         print(self.client.status())
-        self.name = "magicdb/%s/storage" % namespace
+        self.prefix_name = "magicdb/%s/storage" % namespace
         self.locker = "magicdb/%s/storage/locker" % namespace
 
     def db_key(self, database: str) -> str:
-        return "/%s/databases/%s" % (self.name, database)
+        return "/%s/databases/%s" % (self.prefix_name, database)
 
     def machine_key(self, machine: str) -> str:
-        return "/%s/machines/%s" % (self.name, machine)
+        return "/%s/machines/%s" % (self.prefix_name, machine)
 
     def table_key(self, database: str, table: str) -> str:
-        return "/%s/databases/%s/%s" % (self.name, database, table)
+        return "/%s/databases/%s/%s" % (self.prefix_name, database, table)
 
     def check_database(self, database: str) -> bool:
         resp = self.client.get_response(key=self.db_key(database))
@@ -70,7 +70,7 @@ class MagicDBEtcdClient:
         return json.loads(value) if value is not None else {}
 
     def show_databases(self) -> List[str]:
-        db_prefix = "/%s/databases/" % self.name
+        db_prefix = "/%s/databases/" % self.prefix_name
         values = self.client.get_prefix(db_prefix)
         dbs = []
         for value in values:
@@ -101,10 +101,14 @@ class MagicDBEtcdClient:
                 db_info = self.get_db_info(database)
                 if machine not in db_info["machines"]:
                     db_info["machines"].append(machine)
-                self.client.put(db_key, json.dumps(db_info))
-                self.client.put(
-                    key=machine_key, value=json.dumps(
-                        {"database": database})
+                self.client.transaction(
+                    compare=[],
+                    success=[
+                        self.client.transactions.put(db_key, json.dumps(db_info)),
+                        self.client.transactions.put(key=machine_key, value=json.dumps(
+                        {"database": database}))
+                    ],
+                    failure=[ ]
                 )
         return status, msg
 
@@ -119,11 +123,18 @@ class MagicDBEtcdClient:
                     machine,
                 )
             else:
-                self.client.delete(machine_key)
                 db_info = self.get_db_info(database)
                 if machine in db_info["machines"]:
                     db_info["machines"].remove(machine)
-                self.client.put(db_key, json.dumps(db_info))
+                self.client.transaction(
+                    compare=[],
+                    success=[
+                        self.client.transactions.delete(machine_key),
+                        self.client.transactions.put(db_key, json.dumps(db_info))
+                    ],
+                    failure=[ ]
+                )
+    
         return status, msg
 
     def check_table(self, database: str, table: str) -> bool:
@@ -145,8 +156,16 @@ class MagicDBEtcdClient:
                 db_info = self.get_db_info(database)
                 if table in db_info["tables"]:
                     db_info["tables"].remove(table)
-                self.client.put(db_key, json.dumps(db_info))
-                self.client.delete_prefix(prefix=table_key)
+                self.client.transaction(
+                    compare=[],
+                    success=[
+                        self.client.transactions.put(db_key, json.dumps(db_info)),
+                        self.client.transactions.delete(table_key)
+                        #self.client.transactions.delete_prefix(prefix=table_key)
+                    ],
+                    failure=[ ]
+                )
+                
         return status, msg
 
     def get_table_info(self, database: str, table: str) -> dict:
@@ -186,11 +205,23 @@ class MagicDBEtcdClient:
                 db_info = self.get_db_info(database)
                 if table not in db_info["tables"]:
                     db_info["tables"].append(table)
-                    self.client.put(db_key, json.dumps(db_info))
-                self.client.put(
-                    key=table_key,
-                    value=values,
+                   
+                    self.client.transaction(
+                        compare=[],
+                        success=[
+                            self.client.transactions.put(db_key, json.dumps(db_info)),
+                             self.client.transactions.put(
+                                key=table_key,
+                                value=values,
+                            )
+                        ],
+                        failure=[ ]
                 )
+                else:
+                    self.client.put(
+                        key=table_key,
+                        value=values,
+                    )
         return status, msg
 
     def show_versions(self, database: str, table: str) -> List[str]:
@@ -222,7 +253,7 @@ class MagicDBEtcdClient:
     ) -> Tuple[bool, str]:
         status, msg = True, "success"
         table_key = self.table_key(database, table)
-        with self.client.lock(self.name, ttl=10):
+        with self.client.lock(self.prefix_name, ttl=10):
             table_info = self.get_table_info(database, table)
             if version not in table_info["versions"]:
                 status, msg = False, "version:%s not exists" % version
