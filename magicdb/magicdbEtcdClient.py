@@ -104,11 +104,12 @@ class MagicDBEtcdClient:
                 self.client.transaction(
                     compare=[],
                     success=[
-                        self.client.transactions.put(db_key, json.dumps(db_info)),
+                        self.client.transactions.put(
+                            db_key, json.dumps(db_info)),
                         self.client.transactions.put(key=machine_key, value=json.dumps(
-                        {"database": database}))
+                            {"database": database}))
                     ],
-                    failure=[ ]
+                    failure=[]
                 )
         return status, msg
 
@@ -130,11 +131,12 @@ class MagicDBEtcdClient:
                     compare=[],
                     success=[
                         self.client.transactions.delete(machine_key),
-                        self.client.transactions.put(db_key, json.dumps(db_info))
+                        self.client.transactions.put(
+                            db_key, json.dumps(db_info))
                     ],
-                    failure=[ ]
+                    failure=[]
                 )
-    
+
         return status, msg
 
     def check_table(self, database: str, table: str) -> bool:
@@ -159,13 +161,14 @@ class MagicDBEtcdClient:
                 self.client.transaction(
                     compare=[],
                     success=[
-                        self.client.transactions.put(db_key, json.dumps(db_info)),
+                        self.client.transactions.put(
+                            db_key, json.dumps(db_info)),
                         self.client.transactions.delete(table_key)
-                        #self.client.transactions.delete_prefix(prefix=table_key)
+                        # self.client.transactions.delete_prefix(prefix=table_key)
                     ],
-                    failure=[ ]
+                    failure=[]
                 )
-                
+
         return status, msg
 
     def get_table_info(self, database: str, table: str) -> dict:
@@ -205,18 +208,19 @@ class MagicDBEtcdClient:
                 db_info = self.get_db_info(database)
                 if table not in db_info["tables"]:
                     db_info["tables"].append(table)
-                   
+
                     self.client.transaction(
                         compare=[],
                         success=[
-                            self.client.transactions.put(db_key, json.dumps(db_info)),
-                             self.client.transactions.put(
+                            self.client.transactions.put(
+                                db_key, json.dumps(db_info)),
+                            self.client.transactions.put(
                                 key=table_key,
                                 value=values,
                             )
                         ],
-                        failure=[ ]
-                )
+                        failure=[]
+                    )
                 else:
                     self.client.put(
                         key=table_key,
