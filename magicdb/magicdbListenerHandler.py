@@ -159,9 +159,8 @@ class MagicDBListenerHandler(magicdbListener):
             endpoint=db_info["endpoint"],
             **boto3_kwargs,
         )
-
-        self.etcd_client.add_version(database, table, version)
-        self.etcd_client.update_current_version(database, table, version)
+        # 添加新的版本和上线新版本
+        self.etcd_client.add_update_version(database, table, version)
 
     def exitSelect_data(self, ctx: magicdbParser.Select_dataContext):
         table_str = ctx.table().getText()

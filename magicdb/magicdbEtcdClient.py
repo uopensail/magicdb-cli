@@ -265,6 +265,26 @@ class MagicDBEtcdClient:
                 table_info["current_version"] = version
                 self.client.put(table_key, json.dumps(table_info))
         return status, msg
+    
+    def add_update_version( self, database: str, table: str, version: str
+        ) -> Tuple[bool, str]:
+        status, msg = True, "success"
+        table_key = self.table_key(database, table)
+        with self.client.lock(self.locker, ttl=10):
+            if not self.check_table(database, table):
+                status, msg = False, "table:`%s.%s` not exists" % (
+                    database, table)
+            else:
+                table_info = self.get_table_info(database, table)
+                if version not in table_info["versions"]:
+                    table_info["versions"].append(version)
+                    table_info["current_version"] = version
+                    self.client.put(table_key, json.dumps(table_info))
+                else:
+                    status, msg = False, "version:%s exists" % (version)
+        return status, msg
+
+        pass
 
     def drop_version(self, database: str, table: str, version: str) -> Tuple[bool, str]:
         status, msg = True, "success"
