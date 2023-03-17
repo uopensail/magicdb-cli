@@ -413,6 +413,7 @@ def to_magicdb(
     Args:
         work_dir (str): current work dir
         workers (int): work number to process
+        bucket (str): bucket name example: oss://bucket1 | s3://bucket1
         hive_table_dir (str): hvie table path
         s3_data_dir (str): magicdb table data path
         s3_meta_dir (str): magicdb table meta path

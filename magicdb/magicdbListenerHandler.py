@@ -42,9 +42,6 @@ class MagicDBListenerHandler(magicdbParserListener):
         print("database list: ")
         print("[" + "\n".join(map(lambda _: f"`{_}`", databases)) + "]")
 
-    def enterCreate_database(self, ctx:magicdbParser.Create_databaseContext):
-        stack = []
-        ctx._stack = stack
     def exitCreate_database(self, ctx: magicdbParser.Create_databaseContext):
         db = ctx.database_name().getText()
         properties = ctx.properties().properties_
@@ -145,7 +142,6 @@ class MagicDBListenerHandler(magicdbParserListener):
 
         boto3_kwargs = {
             "aws_access_key_id": db_info["access_key"],
-            "aws_secret_access_key": db_info["access_key"],
             "aws_secret_access_key": db_info["secret_key"],
             "region_name": db_info["region"],
             "endpoint_url": db_info["endpoint"],
