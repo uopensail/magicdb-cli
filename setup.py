@@ -9,7 +9,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="magicdb",
-    version="1.0.7",
+    version="1.0.19",
     description="magicdb client cmd tool",
     license="License :: GPL 3",
     author="TimePi",
@@ -28,7 +28,7 @@ setup(
         "numpy == 1.21.0",
         "pandas == 1.2.0",
         "pyarrow == 6.0.1",
-        "antlr4-python3-runtime == 4.10",
+        "antlr4-python3-runtime == 4.12",
         "etcd3 == 0.12.0",
         "awswrangler == 2.18.0",
         "boto3 == 1.26.27",

@@ -35,7 +35,6 @@ class MagicDBEtcdClient:
         values = json.dumps(
             {
                 "name": database,
-                "cloud": properties["cloud"],
                 "bucket": properties["bucket"],
                 "endpoint": properties["endpoint"],
                 "region": properties["region"],

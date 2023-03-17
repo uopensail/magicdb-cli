@@ -11,7 +11,7 @@ import antlr4
 import requests
 from magicdb.magicdbEtcdClient import MagicDBEtcdClient
 from magicdb.magicdbLexer import magicdbLexer
-from magicdb.magicdbListener import magicdbListener
+from magicdb.magicdbParserListener import magicdbParserListener
 from magicdb.magicdbLoad import to_magicdb
 from magicdb.magicdbParser import magicdbParser
 
@@ -26,11 +26,10 @@ def get_engine_namespace() -> str:
     return ENGINE_NAMESPACE
 
 
-class MagicDBListenerHandler(magicdbListener):
+class MagicDBListenerHandler(magicdbParserListener):
     def __init__(self, etcd_client: MagicDBEtcdClient) -> None:
         super().__init__()
         self.etcd_client = etcd_client
-        self.stack = []
 
     def exitDrop_database(self, ctx: magicdbParser.Drop_databaseContext):
         db = ctx.database_name().getText()
@@ -43,9 +42,12 @@ class MagicDBListenerHandler(magicdbListener):
         print("database list: ")
         print("[" + "\n".join(map(lambda _: f"`{_}`", databases)) + "]")
 
+    def enterCreate_database(self, ctx:magicdbParser.Create_databaseContext):
+        stack = []
+        ctx._stack = stack
     def exitCreate_database(self, ctx: magicdbParser.Create_databaseContext):
         db = ctx.database_name().getText()
-        properties = self.stack.pop(-1)
+        properties = ctx.properties().properties_
         _, msg = self.etcd_client.create_database(db, properties)
         print(msg)
 
@@ -84,7 +86,7 @@ class MagicDBListenerHandler(magicdbListener):
         table_str = ctx.table().getText()
         items = table_str.split(".")
         db, table = items[0], items[1]
-        properties = self.stack.pop(-1)
+        properties = ctx.properties().properties_
         _, msg = self.etcd_client.create_table(db, table, properties)
         print(msg)
 
@@ -132,7 +134,11 @@ class MagicDBListenerHandler(magicdbListener):
         items = table_str.split(".")
         database, table = items[0], items[1]
         remote_path = ctx.STRING().getText()
-        properties = self.stack.pop(-1)
+        remote_path = eval(remote_path)
+        properties = {}
+        properties_ctx = ctx.properties()
+        if hasattr(properties_ctx, "properties_"):
+            properties = properties_ctx.properties_
         db_info = self.etcd_client.get_db_info(database=database)
         table_info = self.etcd_client.get_table_info(
             database=database, table=table)
@@ -142,6 +148,7 @@ class MagicDBListenerHandler(magicdbListener):
             "aws_secret_access_key": db_info["access_key"],
             "aws_secret_access_key": db_info["secret_key"],
             "region_name": db_info["region"],
+            "endpoint_url": db_info["endpoint"],
         }
 
         version = to_magicdb(
@@ -149,14 +156,14 @@ class MagicDBListenerHandler(magicdbListener):
                 "workdir", "/tmp/magicdb/%s/%s/%d" % (
                     database, table, int(time.time()))
             ),
-            worker=properties.get("workers", max(cpu_count() - 1, 1)),
+            workers=properties.get("workers", max(cpu_count() - 1, 1)),
+            bucket=db_info["bucket"],
             hive_table_dir=remote_path,
             s3_data_dir=table_info["data"],
             s3_meta_dir=table_info["meta"],
             table_name=table,
-            key_name=properties["key"],
+            key_name=table_info["key"],
             partitions=properties.get("partitions", 100),
-            endpoint=db_info["endpoint"],
             **boto3_kwargs,
         )
         # 添加新的版本和上线新版本
@@ -182,19 +189,21 @@ class MagicDBListenerHandler(magicdbListener):
         value = requests.post(url, json={"key": key})
         print(value["features"])
 
+
     def exitProperties(self, ctx: magicdbParser.PropertiesContext):
         properties = {}
-        while len(self.stack) > 0:
-            pair = self.stack.pop(-1)
-            properties.update(pair)
-        self.stack.append(properties)
+        pairs = ctx.pair()
+        for pair in pairs:
+            properties.update(pair.pair_)
+        ctx.properties_ = properties
+
         return properties
 
     def exitPair(self, ctx: magicdbParser.PairContext):
         key = ctx.STRING().getText()
         value = ctx.value().getText()
         pair = eval("{%s:%s}" % (key, value))
-        self.stack.append(pair)
+        ctx.pair_ = pair
         return pair
 
 
@@ -203,14 +212,14 @@ def parse(command: str, etcd_client: MagicDBEtcdClient):
     stream = antlr4.CommonTokenStream(lexer)
     parser = magicdbParser(stream)
     walker = antlr4.ParseTreeWalker()
-    tree = parser.start()
+    tree = parser.parse()
     client = MagicDBListenerHandler(etcd_client)
     walker.walk(client, tree)
 
 
 if __name__ == "__main__":
     drop_database = "DROP database if exists database1;"
-    create_database = 'create database if not exists database1 with properties("access_key" = "Access_key","secret_key" = "secret_key","bucket"="bucket","endpoint"="endpoint","cloud"="s3","region"="region");'
+    create_database = 'create database if not exists database1 with properties("access_key" = "Access_key","secret_key" = "secret_key","bucket"="oss://bucket","endpoint"="endpoint","region"="region");'
     show_databases = "show databases;"
     add_machine = 'alter database database1 add machine("10.0.0.3");'
     show_machines = "show machines database1;"
@@ -224,7 +233,7 @@ if __name__ == "__main__":
     show_versions_1 = "show versions database1.table1;"
     show_versions_2 = "show versions database1.table2;"
     show_current_versions = "show current version database1.table1;"
-    load_data = 'Load data "oss://xxxx/dt=20221124/" into table database1.table1 with PROPERTIES("k1" = "v1","k2" = "v2");'
+    load_data = 'load data "oss://xxxx/dt=20221124/" into table database1.table1 with PROPERTIES("k1" = "v1","k2" = "v2");'
 
     drop_version_1 = 'alter table database1.table1 drop version("version1");'
     drop_version_2 = 'alter table database1.table1 drop version("version2");'

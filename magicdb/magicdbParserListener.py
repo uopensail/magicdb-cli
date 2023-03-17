@@ -8,12 +8,21 @@ else:
 # This class defines a complete listener for a parse tree produced by magicdbParser.
 class magicdbParserListener(ParseTreeListener):
 
-    # Enter a parse tree produced by magicdbParser#start.
-    def enterStart(self, ctx:magicdbParser.StartContext):
+    # Enter a parse tree produced by magicdbParser#parse.
+    def enterParse(self, ctx:magicdbParser.ParseContext):
         pass
 
-    # Exit a parse tree produced by magicdbParser#start.
-    def exitStart(self, ctx:magicdbParser.StartContext):
+    # Exit a parse tree produced by magicdbParser#parse.
+    def exitParse(self, ctx:magicdbParser.ParseContext):
+        pass
+
+
+    # Enter a parse tree produced by magicdbParser#command_list.
+    def enterCommand_list(self, ctx:magicdbParser.Command_listContext):
+        pass
+
+    # Exit a parse tree produced by magicdbParser#command_list.
+    def exitCommand_list(self, ctx:magicdbParser.Command_listContext):
         pass
 
 

@@ -10,14 +10,13 @@ import json
 import os
 import shutil
 import sqlite3
+from magicdb.bucket_util import *
 import time
 from concurrent.futures import ProcessPoolExecutor
 from enum import IntEnum
 from multiprocessing import cpu_count
 from typing import List
 
-import awswrangler as wr
-import boto3
 import mmh3
 import pandas as pd
 import pyarrow
@@ -41,7 +40,6 @@ PY_ARROW_FLOAT_TYPE = [
 ]
 PY_ARROW_STRING_TYPE = [pyarrow.lib.Type_STRING, pyarrow.lib.Type_LARGE_STRING]
 
-
 MERGE_TABLE_SCRIPT = """#!/bin/bash -xv
 rm -rf PATH
 sqlite3 PATH <<__SQL__
@@ -50,20 +48,6 @@ ATTACH_SCRIPT
 INSERT_SCRIPT
 __SQL__
 """
-
-
-def setup_default_session(
-    endpoint: str = "",
-    **kwargs: str,
-):
-    """setup boto3 session
-
-    Args:
-        endpoint (str, optional): endpoint of oss/s3. Defaults to "".
-    """
-    boto3.setup_default_session(**kwargs)
-    if endpoint != "":
-        wr.config.s3_endpoint_url = endpoint
 
 
 def pyarrow_type_to_sqlite_type(field: pyarrow.lib.Field) -> str:
@@ -171,12 +155,11 @@ def get_sqlite_insert_sql(schema: pyarrow.Schema, table_name: str) -> str:
     return dml
 
 
-def get_table_schema(
-    path: str,
-    work_dir: str,
-    endpoint: str = "",
-    **kwargs: str,
-) -> pyarrow.Schema:
+def get_table_schema(bucket: str,
+                     path: str,
+                     work_dir: str,
+                     **kwargs: str,
+                     ) -> pyarrow.Schema:
     """get the schema of table
 
     Args:
@@ -187,48 +170,48 @@ def get_table_schema(
     Returns:
         pyarrow.Schema: return the schema
     """
-    setup_default_session(endpoint=endpoint, **kwargs)
+
     base_name = os.path.basename(path)
     local_file = os.path.join(work_dir, base_name)
-    wr.s3.download(path, local_file)
+    bucket_download_file(bucket=bucket, remote_path=path, dst_path=local_file, **kwargs)
     table = pq.read_table(local_file)
     return table.schema
 
 
 def parquet_to_raw_sqlite(
-    path: str,
-    schema: pyarrow.Schema,
-    key_name: str,
-    table_name: str,
-    work_dir: str,
-    partitions: int,
-    endpoint: str = "",
-    **kwargs: str,
+        bucket: str,
+        path: str,
+        schema: pyarrow.Schema,
+        key_name: str,
+        table_name: str,
+        work_dir: str,
+        partitions: int,
+        **kwargs: str,
 ):
     """transform parquet file tp sqlite file
 
     Args:
         path (str): remote s3/oss file path
+        bucket (str): bucket name
         schema (pyarrow.Schema): schema of parquet
         key_name (str): primary key
         table_name (str): table name
         work_dir (str): current work dir
         partitions (int, optional): _description_. Defaults to 100.
-        endpoint (str, optional): _description_. Defaults to "".
     """
     base_name = os.path.basename(path)
     local_parquet_file = os.path.join(work_dir, base_name)
     db_path = os.path.join(work_dir, f"{base_name}.db")
-    bucket = "$bucket_id$"
     ddls, dmls = [], []
     print(f"processing parquet file: {path} to sqlite: {db_path}...")
-    setup_default_session(endpoint=endpoint, **kwargs)
 
     if os.path.exists(db_path):
         os.remove(db_path)
     if os.path.exists(local_parquet_file):
         os.remove(local_parquet_file)
-    wr.s3.download(path=path, local_file=local_parquet_file)
+
+    bucket_download_file(bucket=bucket, remote_path=path, dst_path=local_parquet_file, **kwargs)
+
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
 
@@ -265,27 +248,27 @@ def parquet_to_raw_sqlite(
 
 
 def parquets_to_raw_sqlites(
-    schema: pyarrow.Schema,
-    input_files: List[str],
-    output_dir: str,
-    key_name: str,
-    table_name: str,
-    worker: int,
-    partitions: int = 100,
-    endpoint: str = "",
-    **kwargs: str,
+        schema: pyarrow.Schema,
+        bucket: str,
+        input_files: List[str],
+        output_dir: str,
+        key_name: str,
+        table_name: str,
+        worker: int,
+        partitions: int = 100,
+        **kwargs: str,
 ) -> List[str]:
     """transform all parquet files to sqlite files
 
     Args:
         schema (pyarrow.Schema): parquet schema
+        bucket (str): bucket name
         input_files (List[str]): parquet file list
         output_dir (str): where to put the sqlite files
         key_name (str): primary key
         table_name (str): table name
         worker (int): work number
         partitions (int, optional): how many tables to split. Defaults to 100.
-        endpoint (str, optional): endpoint url. Defaults to "".
 
     Returns:
         List[str]: return the sqlite file list
@@ -298,13 +281,13 @@ def parquets_to_raw_sqlites(
         output_files.append(local_file)
         pool.submit(
             parquet_to_raw_sqlite,
+            bucket,
             input_files[i],
             schema,
             key_name,
             table_name,
             output_dir,
             partitions,
-            endpoint,
             **kwargs,
         )
     pool.shutdown(wait=True)
@@ -312,12 +295,12 @@ def parquets_to_raw_sqlites(
 
 
 def build_table_partition(
-    output_dir: str,
-    bash_dir: str,
-    partition: int,
-    table_name: str,
-    ddl: str,
-    inputs: List[str],
+        output_dir: str,
+        bash_dir: str,
+        partition: int,
+        table_name: str,
+        ddl: str,
+        inputs: List[str],
 ):
     """build partition data of this table
 
@@ -356,30 +339,10 @@ def build_table_partition(
     os.system(f"bash {bash_file}")
 
 
-def r_s3path(path: str) -> str:
-    """change path, when use awswrangler, prefix MUST be `s3://`,
-        but this tool CAN download oss files on aliyun
-
-    Args:
-        path (str): remote path
-
-    Returns:
-        str: s3 path
-    """
-    real_path = path
-    if not real_path.endswith("/"):
-        real_path += "/"
-    if real_path.startswith("oss://"):
-        real_path = real_path.replace("oss://", "s3://")
-    assert real_path.startswith("s3://")
-    return real_path
-
-
-def r_listfiles(
-    path: str,
-    endpoint: str = "",
-    **kwargs: str,
-) -> List[str]:
+def r_listfiles(bucket: str,
+                path: str,
+                **kwargs: str,
+                ) -> List[str]:
     """list the file on oss/s3
 
     Args:
@@ -389,25 +352,17 @@ def r_listfiles(
     Returns:
         List[str]: files in remote dir
     """
-    setup_default_session(endpoint=endpoint, **kwargs)
-    s3path = r_s3path(path)
-
-    tmp_dirs = wr.s3.list_directories(path)
-    if len(tmp_dirs) > 0:
-        print(f"{path} can only contain files")
-        exit(0)
-    files = wr.s3.list_objects(s3path, ignore_empty=True)
-    return files
+    return bucket_list_file_on_cur_dir(bucket=bucket, prefix=path, **kwargs)
 
 
 def build_table(
-    table_name: str,
-    ddl: str,
-    input_files: List[str],
-    output_dir: str,
-    bash_dir: str,
-    partitions: int,
-    worker: int,
+        table_name: str,
+        ddl: str,
+        input_files: List[str],
+        output_dir: str,
+        bash_dir: str,
+        partitions: int,
+        worker: int,
 ) -> List[str]:
     """build table data
 
@@ -442,16 +397,16 @@ def build_table(
 
 
 def to_magicdb(
-    work_dir: str,
-    workers: int,
-    hive_table_dir: str,
-    s3_data_dir: str,
-    s3_meta_dir: str,
-    key_name: str,
-    table_name: str,
-    partitions: int = 100,
-    endpoint: str = "",
-    **kwargs,
+        work_dir: str,
+        workers: int,
+        bucket: str,
+        hive_table_dir: str,
+        s3_data_dir: str,
+        s3_meta_dir: str,
+        key_name: str,
+        table_name: str,
+        partitions: int = 100,
+        **kwargs,
 ) -> str:
     """to magicdb data
 
@@ -464,22 +419,21 @@ def to_magicdb(
         key_name (str): primary key
         table_name (str): table name
         partitions (int, optional): how many tables to split. Defaults to 100.
-        endpoint (str, optional): endpoint of oss/s3. Defaults to "".
 
     Returns:
         str: version of magicdb table
     """
-    setup_default_session(endpoint=endpoint, **kwargs)
+
     timestamp = int(time.time())
     work_dir = os.path.join(work_dir, str(timestamp))
     _raw_sqlite_dir = os.path.join(work_dir, "_sqlite")
     _bash_dir = os.path.join(work_dir, "_bash")
     table_dir = os.path.join(work_dir, "sqlite")
 
-    remote_dir = os.path.join(r_s3path(s3_data_dir), str(timestamp))
+    remote_dir = os.path.join(s3_data_dir, str(timestamp))
     version = f"{table_name}.json@{timestamp}"
     local_meta_file = os.path.join(work_dir, f"{table_name}.json")
-    remote_meta_file = os.path.join(r_s3path(s3_meta_dir), version)
+    remote_meta_file = os.path.join(s3_meta_dir, version)
 
     if os.path.exists(work_dir):
         shutil.rmtree(work_dir)
@@ -489,15 +443,16 @@ def to_magicdb(
     os.makedirs(_bash_dir)
     os.makedirs(table_dir)
 
-    parquet_files = r_listfiles(hive_table_dir)
+    parquet_files = r_listfiles(bucket, hive_table_dir, **kwargs)
     assert len(parquet_files) > 0
-    schema = get_table_schema(
-        path=parquet_files[0], work_dir=work_dir, endpoint=endpoint, **kwargs
-    )
+    schema = get_table_schema(bucket=bucket,
+                              path=parquet_files[0], work_dir=work_dir, **kwargs
+                              )
     ddl = generate_sqlite_ddl(
         schema=schema, key_name=key_name, table_name=table_name)
 
     raw_sqlite_files = parquets_to_raw_sqlites(
+        bucket=bucket,
         schema=schema,
         input_files=parquet_files,
         output_dir=_raw_sqlite_dir,
@@ -505,7 +460,6 @@ def to_magicdb(
         table_name=table_name,
         worker=workers,
         partitions=partitions,
-        endpoint=endpoint,
         **kwargs,
     )
 
@@ -524,7 +478,7 @@ def to_magicdb(
         base_name = os.path.basename(pfile)
         remote_path = os.path.join(remote_dir, base_name)
         remote_paths.append(remote_path)
-        wr.s3.upload(local_file=pfile, path=remote_path)
+        bucket_upload_file(local_path=pfile, bucket=bucket, remote_path=remote_path, **kwargs)
 
     data = {
         "name": table_name,
@@ -535,7 +489,7 @@ def to_magicdb(
     }
 
     json.dump(data, open(local_meta_file, "w"))
-    wr.s3.upload(local_file=local_meta_file, path=remote_meta_file)
+    bucket_upload_file(local_path=local_meta_file, bucket=bucket, remote_path=remote_meta_file, **kwargs)
     shutil.rmtree(work_dir)
     return version
 
@@ -548,6 +502,9 @@ def main():
     )
     parser.add_argument(
         "--meta", type=str, required=True, help="remote path to put meta file"
+    )
+    parser.add_argument(
+        "--bucket", type=str, required=True, help="remote bucket name, example: s3://bucket-name"
     )
     parser.add_argument(
         "--path", type=str, required=True, help="remote path to of table"
@@ -579,10 +536,12 @@ def main():
         boto3_kwargs["aws_secret_access_key"] = args.secret_key
     if args.region != "":
         boto3_kwargs["region_name"] = args.region
+    if args.endpoint != "":
+        boto3_kwargs["endpoint_url"] = args.endpoint
 
     to_magicdb(
         work_dir=args.work_dir,
-        worker=args.worker,
+        workers=args.worker,
         hive_table_dir=args.path,
         s3_data_dir=args.data,
         s3_meta_dir=args.meta,

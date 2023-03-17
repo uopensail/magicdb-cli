@@ -6,7 +6,11 @@ parser grammar magicdbParser;
 options {
     tokenVocab = magicdbLexer;
 }
-start: command EOF;
+parse: command_list EOF;
+
+command_list
+   : SCOL* command (SCOL+ command)* SCOL*
+   ;
 
 command
     : database_cmd
@@ -31,7 +35,7 @@ show_databases
    : SHOW DATABASES
    ;
 create_database
-   : CREATE DATABASE (IF NOT EXISTS)? database_name properties 
+   : CREATE DATABASE (IF NOT EXISTS)? database_name properties
    ;
 
 // 机器相关的操作
@@ -128,4 +132,3 @@ value
    | TRUE
    | FALSE
    ;
-
