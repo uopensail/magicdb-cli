@@ -77,7 +77,7 @@ show current version db_name.table_name;
 -- db_name: the name of this database
 -- table_name: the name of this table
 -- version1: the name of current version
-update db_name.table_name set version = 'version1';
+update table db_name.table_name set current version = "version1";
 ```
 
 ### Drop A Version Of A Table
@@ -88,7 +88,7 @@ update db_name.table_name set version = 'version1';
 -- version1: the name of current version
 
 -- if `version1` is current version, then the new current version is set `nil`.
-alter db_name.table_name drop version('version1');
+alter table db_name.table_name drop version("version1");
 ```
 
 
@@ -104,14 +104,14 @@ show machines db_name;
 ```sql
 -- db_name: the name of this database
 -- machine_ip: ip of this machine
-alter database db_name drop machine('machine_ip');
+alter database db_name drop machine("machine_ip");
 ```
 
 ### Add A Machine Of A Database
 ```sql
 -- db_name: the name of this database
 -- machine_ip: ip of this machine
-alter database db_name add machine('machine_ip');
+alter database db_name add machine("machine_ip");
 ```
 
 

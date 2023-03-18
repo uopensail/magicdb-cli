@@ -7,6 +7,7 @@ create database if not exists database1 with
                 "bucket"="oss://uopensail-test","endpoint"="https://oss-cn-shanghai.aliyuncs.com",
                 "region"="cn-shanghai");
 
+
 show databases;
 create table database1.table1 with 
     properties("data_dir"="test/magicdb/database1/table1/datas",
@@ -16,6 +17,10 @@ show tables database1;
 
 show versions database1.table1;
 load data "test/parquet/" into table database1.table1;
+
+alter database database1 drop machine("192.168.1.6:6528");
+alter database database1 add machine("192.168.1.6:6528");
+update table database1.table1 set current version = "1679057235";
 
 EOF
 

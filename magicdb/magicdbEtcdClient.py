@@ -15,6 +15,7 @@ class MagicDBEtcdClient:
         self.client = etcd3.Etcd3Client(
             host=host, port=port, password=passwd, timeout=5)
         print(self.client.status())
+        self.namespace = namespace
         self.prefix_name = "magicdb/%s/storage" % namespace
         self.locker = "magicdb/%s/storage/locker" % namespace
 
@@ -22,7 +23,7 @@ class MagicDBEtcdClient:
         return "/%s/databases/%s" % (self.prefix_name, database)
 
     def machine_key(self, machine: str) -> str:
-        return "/%s/machines/%s" % (self.prefix_name, machine)
+        return "/magicdb/machines/%s" % (machine)
 
     def table_key(self, database: str, table: str) -> str:
         return "/%s/databases/%s/%s" % (self.prefix_name, database, table)
@@ -106,7 +107,7 @@ class MagicDBEtcdClient:
                         self.client.transactions.put(
                             db_key, json.dumps(db_info)),
                         self.client.transactions.put(key=machine_key, value=json.dumps(
-                            {"database": database}))
+                            {"database": database, "namespace": self.namespace}))
                     ],
                     failure=[]
                 )
@@ -264,9 +265,9 @@ class MagicDBEtcdClient:
                 table_info["current_version"] = version
                 self.client.put(table_key, json.dumps(table_info))
         return status, msg
-    
-    def add_update_version( self, database: str, table: str, version: str
-        ) -> Tuple[bool, str]:
+
+    def add_update_version(self, database: str, table: str, version: str
+                           ) -> Tuple[bool, str]:
         status, msg = True, "success"
         table_key = self.table_key(database, table)
         with self.client.lock(self.locker, ttl=10):

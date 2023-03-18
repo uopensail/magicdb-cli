@@ -181,7 +181,7 @@ class MagicDBListenerHandler(magicdbParserListener):
         if table_info["key"] != field:
             print("err! not support select record using filed: %s" % field)
             return
-        url = "http://%s:%d/api/v1/get" % (machines[0], 9528)
+        url = "http://%s/api/v1/get" % (machines[0])
         value = requests.post(url, json={"key": key})
         print(value["features"])
 
