@@ -230,7 +230,7 @@ def parquet_to_raw_sqlite(
     cur.execute("""PRAGMA journal_mode = OFF;""")
 
     def hash_func(x):
-        return mmh3.hash64(x[key_name], signed=False)[0] % partitions
+        return mmh3.hash64(str(x[key_name]), signed=False)[0] % partitions
 
     df = pd.read_parquet(path=local_parquet_file)
     df[bucket] = df.apply(hash_func, axis=1)

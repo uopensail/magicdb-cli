@@ -20,7 +20,7 @@ load data "test/parquet/" into table database1.table1;
 
 alter database database1 drop machine("192.168.1.6:6528");
 alter database database1 add machine("192.168.1.6:6528");
-update table database1.table1 set current version = "1679057235";
+update table database1.table1 set current version = "table1.json@1679150222";
 
 EOF
 

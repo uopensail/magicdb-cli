@@ -23,7 +23,7 @@ class MagicDBEtcdClient:
         return "/%s/databases/%s" % (self.prefix_name, database)
 
     def machine_key(self, machine: str) -> str:
-        return "/magicdb/machines/%s" % (machine)
+        return "/magicdb/storage/machines/%s" % (machine)
 
     def table_key(self, database: str, table: str) -> str:
         return "/%s/databases/%s/%s" % (self.prefix_name, database, table)
