@@ -65,6 +65,10 @@ fragment INT: '0' | [1-9] [0-9]*;
 
 fragment EXP options { caseInsensitive=false; }  : [Ee] [+\-]? INT;
 
+SINGLE_LINE_COMMENT: '--' ~[\r\n]* (('\r'? '\n') | EOF) -> skip;
+
+MULTILINE_COMMENT: '/*' .*? '*/' -> skip;
+
 // \- since - means "range" inside [...]
 
 // 定义空白字符
