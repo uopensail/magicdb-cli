@@ -37,7 +37,7 @@ class MagicDBListenerHandler(magicdbParserListener):
         print(msg)
 
     def exitShow_databases(self, ctx: magicdbParser.Show_databasesContext):
-        print("exitShow_databases")
+        #print("exitShow_databases")
         databases = self.etcd_client.show_databases()
         print("database list: ")
         print("[" + "\n".join(map(lambda _: f"`{_}`", databases)) + "]")

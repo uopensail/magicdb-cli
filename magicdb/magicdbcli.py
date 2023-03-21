@@ -9,7 +9,6 @@ from magicdb.magicdbEtcdClient import MagicDBEtcdClient
 import argparse
 import sys,traceback
 import etcd3
-
 import cmd
 
 class MagicDBCmd(cmd.Cmd):
