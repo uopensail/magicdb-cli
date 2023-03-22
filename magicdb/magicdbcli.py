@@ -4,21 +4,60 @@
 desc: process commands for magicdb-cli
 author: Julong
 """
+from magicdb.magicdbLexer import magicdbLexer
 from magicdb.magicdbListenerHandler import parse, set_engine_namespace
 from magicdb.magicdbEtcdClient import MagicDBEtcdClient
 import argparse
-import sys,traceback
+import sys, traceback
 import etcd3
 import cmd
+import readline
+import os.path
+import atexit
+
 
 class MagicDBCmd(cmd.Cmd):
-    def __init__(self, etcd_client,stdin=None):
-        super().__init__(stdin=stdin)
+    def __init__(self, etcd_client):
+        super().__init__()
         self.prompt = 'magicdb> '
         self.multiline = False
         self.buffer = ''
         self.etcd_client = etcd_client
-        
+
+        self.hist_file = os.path.expanduser('~/.magicdbcli_history')
+        self.hist_file_size = 1000
+        self.keywords = [eval(name) for name in magicdbLexer().literalNames[1:]]
+
+
+    def preloop(self):
+        if readline and os.path.exists(self.hist_file):
+            readline.read_history_file(self.hist_file)
+            atexit.register(readline.write_history_file, self.hist_file)
+        if 'libedit' in readline.__doc__:
+            readline.parse_and_bind("bind ^I rl_complete")
+        else:
+            readline.parse_and_bind("tab: complete")
+
+    def postloop(self):
+        if readline:
+            readline.set_history_length(self.hist_file_size)
+            readline.write_history_file(self.hist_file)
+
+    def completedefault(self, *args):
+        text = args[0].upper()
+        return [a for a in self.keywords if a.startswith(text)]
+
+    def completenames(self, text, *ignored):
+        dotext = 'do_' + text
+        inline_cmd = [a[3:] for a in self.get_names() if a.startswith(dotext)]
+        text = text.upper()
+        keywords = [a for a in self.keywords if a.startswith(text)]
+        if len(inline_cmd) > 0:
+            inline_cmd.extend(keywords)
+            return inline_cmd
+        else:
+            return keywords
+
     def default(self, line):
         if not self.multiline:
             if line.strip().endswith(';'):
@@ -48,7 +87,7 @@ class MagicDBCmd(cmd.Cmd):
             print("Etcd Exception Occur, Exit")
             exit(1)
         except Exception as e:
-            #continue
+            # continue
             print("Exception: ", e)
             traceback.print_exc(file=sys.stdout)
             pass
@@ -57,11 +96,10 @@ class MagicDBCmd(cmd.Cmd):
         """Exit magicdb."""
         print("Exiting magicdb.")
         return True
-    
+
     def emptyline(self):
         # 如果用户输入了空行，则不做任何处理
         pass
-
 
 
 def main():
@@ -93,4 +131,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
