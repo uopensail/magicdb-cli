@@ -90,9 +90,9 @@ def generate_features_from_schema(schema: pyarrow.Schema) -> dict:
         schema (pyarrow.Schema): schame of parquet table
 
     Returns:
-        dict: features dict
+        list: features list
     """
-    dic = {}
+    feature_list = []
 
     def parquet_type_to_feature_type(field: pyarrow.lib.Field):
         if field.type.id in PY_ARROW_INTEGER_TYPE:
@@ -105,9 +105,9 @@ def generate_features_from_schema(schema: pyarrow.Schema) -> dict:
 
     for col in schema:
         dtype, stype = parquet_type_to_feature_type(col)
-        dic[col.name] = {"column": col.name,
-                         "dtype": dtype.value, "stype": stype.value}
-    return dic
+        feature_list.append({"column": col.name,
+                         "dtype": dtype.value, "stype": stype.value})
+    return feature_list
 
 
 def generate_sqlite_ddl(schema: pyarrow.Schema, key_name: str, table_name: str) -> str:
