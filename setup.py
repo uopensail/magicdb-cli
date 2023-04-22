@@ -7,37 +7,32 @@
 
 from setuptools import setup, find_packages
 
+with open("README.md", "r") as fd:
+    long_description = fd.read()
+with open("requirements.txt", "r") as fd:
+    requires_list = fd.readlines()
+    requires_list = [i.strip() for i in requires_list]
+
 setup(
-    name="magicdb",
+    name="magicdbcli",
     version="1.0.19",
     description="magicdb client cmd tool",
     license="License :: GPL 3",
     author="TimePi",
     author_email="timepi@uopensail.com",
-    url="https://github.com/uopensail/magicdb",
-    py_modules=["magicdb"],
+    url="https://github.com/uopensail/magicdb-cli",
+    py_modules=["magicdbcli"],
     keywords="magicdb client",
-    long_description="",
+    long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
-    install_requires=[
-        "grpcio==1.27.1",
-        "mmh3 == 3.0.0",
-        "numpy == 1.21.0",
-        "pandas == 1.2.0",
-        "pyarrow == 6.0.1",
-        "antlr4-python3-runtime == 4.12",
-        "etcd3 == 0.12.0",
-        "awswrangler == 2.18.0",
-        "boto3 == 1.26.27",
-    ],
-
+    install_requires=requires_list,
     scripts=[],
     entry_points={
         'console_scripts': [
-            'magicdbcli = magicdb.magicdbcli:main'
+            'magicdbcli = magicdbcli.magicdbcli:main'
         ]
     },
     classifiers=[
