@@ -14,14 +14,14 @@ with open("requirements.txt", "r") as fd:
     requires_list = [i.strip() for i in requires_list]
 
 setup(
-    name="magicdbcli",
-    version="1.0.19",
+    name="magicdb_cli",
+    version="1.0.20",
     description="magicdb client cmd tool",
     license="License :: GPL 3",
     author="TimePi",
     author_email="timepi@uopensail.com",
     url="https://github.com/uopensail/magicdb-cli",
-    py_modules=["magicdbcli"],
+    py_modules=["magicdb_cli"],
     keywords="magicdb client",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -32,7 +32,7 @@ setup(
     scripts=[],
     entry_points={
         'console_scripts': [
-            'magicdbcli = magicdbcli.magicdbcli:main'
+            'magicdbcli = magicdb_cli.magicdbcli:main'
         ]
     },
     classifiers=[
