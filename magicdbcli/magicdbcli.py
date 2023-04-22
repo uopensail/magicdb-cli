@@ -4,9 +4,9 @@
 desc: process commands for magicdb-cli
 author: Julong
 """
-from magicdb.magicdbLexer import magicdbLexer
-from magicdb.magicdbListenerHandler import parse, set_engine_namespace
-from magicdb.magicdbEtcdClient import MagicDBEtcdClient
+from magicdbcli.magicdbLexer import magicdbLexer
+from magicdbcli.magicdbListenerHandler import parse, set_engine_namespace
+from magicdbcli.magicdbEtcdClient import MagicDBEtcdClient
 import argparse
 import sys, traceback
 import etcd3

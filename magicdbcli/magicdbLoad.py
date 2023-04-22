@@ -10,7 +10,7 @@ import json
 import os
 import shutil
 import sqlite3
-from magicdb.bucket_util import *
+from magicdbcli.bucket_util import *
 import time
 from concurrent.futures import ProcessPoolExecutor
 from enum import IntEnum

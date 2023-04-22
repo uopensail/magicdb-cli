@@ -9,11 +9,11 @@ from multiprocessing import cpu_count
 
 import antlr4
 import requests
-from magicdb.magicdbEtcdClient import MagicDBEtcdClient
-from magicdb.magicdbLexer import magicdbLexer
-from magicdb.magicdbParserListener import magicdbParserListener
-from magicdb.magicdbLoad import to_magicdb
-from magicdb.magicdbParser import magicdbParser
+from magicdbcli.magicdbEtcdClient import MagicDBEtcdClient
+from magicdbcli.magicdbLexer import magicdbLexer
+from magicdbcli.magicdbParserListener import magicdbParserListener
+from magicdbcli.magicdbLoad import to_magicdb
+from magicdbcli.magicdbParser import magicdbParser
 
 ENGINE_NAMESPACE = ""
 
