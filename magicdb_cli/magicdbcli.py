@@ -1,19 +1,34 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- coding: UTF-8 -*-
-"""
-desc: process commands for magicdb-cli
-author: Julong
-"""
+#
+# `magicdb-cli` - 'client for magicdb'
+# Copyright (C) 2019 - present timepi <timepi123@gmail.com>
+# `magicdb-cli` is provided under: GNU Affero General Public License
+# (AGPL3.0) https:#www.gnu.org/licenses/agpl-3.0.html unless stated otherwise.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+
+import argparse
+import atexit
+import cmd
+import os.path
+import readline
+import sys
+import traceback
+
+import etcd3
+
+from magicdb_cli.magicdbEtcdClient import MagicDBEtcdClient
 from magicdb_cli.magicdbLexer import magicdbLexer
 from magicdb_cli.magicdbListenerHandler import parse, set_engine_namespace
-from magicdb_cli.magicdbEtcdClient import MagicDBEtcdClient
-import argparse
-import sys, traceback
-import etcd3
-import cmd
-import readline
-import os.path
-import atexit
 
 
 class MagicDBCmd(cmd.Cmd):

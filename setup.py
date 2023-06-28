@@ -1,11 +1,25 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-@author: timepi
-@description: this is setup script for magicdb-cli
-"""
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+#
+# `magicdb-cli` - 'client for magicdb'
+# Copyright (C) 2019 - present timepi <timepi123@gmail.com>
+# `magicdb-cli` is provided under: GNU Affero General Public License
+# (AGPL3.0) https:#www.gnu.org/licenses/agpl-3.0.html unless stated otherwise.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
 
-from setuptools import setup, find_packages
+# this is setup script for magicdb-cli
+
+
+from setuptools import find_packages, setup
 
 with open("README.md", "r") as fd:
     long_description = fd.read()
@@ -15,7 +29,7 @@ with open("requirements.txt", "r") as fd:
 
 setup(
     name="magicdb_cli",
-    version="1.0.20",
+    version="1.0.21",
     description="magicdb client cmd tool",
     license="License :: GPL 3",
     author="TimePi",
@@ -38,7 +52,7 @@ setup(
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "License :: GPL 3",
+        "License :: AGPL 3",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
