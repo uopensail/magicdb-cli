@@ -31,7 +31,7 @@ setup(
     name="magicdb_cli",
     version="1.0.21",
     description="magicdb client cmd tool",
-    license="License :: GPL 3",
+    license="License :: AGPL 3",
     author="TimePi",
     author_email="timepi@uopensail.com",
     url="https://github.com/uopensail/magicdb-cli",
