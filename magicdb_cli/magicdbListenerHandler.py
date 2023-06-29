@@ -140,6 +140,7 @@ class MagicDBListenerHandler(magicdbParserListener):
         print(msg)
 
     def exitLoad_data(self, ctx: magicdbParser.Load_dataContext):
+        # TODO add spark load
         table_str = ctx.table().getText()
         items = table_str.split(".")
         database, table = items[0], items[1]
