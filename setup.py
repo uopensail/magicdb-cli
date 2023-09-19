@@ -29,7 +29,7 @@ with open("requirements.txt", "r") as fd:
 
 setup(
     name="magicdb_cli",
-    version="1.0.21",
+    version="1.0.22",
     description="magicdb client cmd tool",
     license="License :: AGPL 3",
     author="TimePi",
