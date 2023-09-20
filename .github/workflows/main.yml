@@ -10,11 +10,11 @@ name: Upload Python Package
 
 
 on:
-  #release:
-  #  types: [published]
-  push:
-    branches:
-      - pypi
+  release:
+    types: [published]
+  #push:
+  #  branches:
+  #    - pypi
 
 permissions:
   contents: read
