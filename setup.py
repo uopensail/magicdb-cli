@@ -20,16 +20,28 @@
 
 
 from setuptools import find_packages, setup
+from os import path
+import pathlib
 
-with open("README.md", "r") as fd:
-    long_description = fd.read()
-with open("requirements.txt", "r") as fd:
-    requires_list = fd.readlines()
-    requires_list = [i.strip() for i in requires_list]
+here = pathlib.Path(__file__).parent.resolve()
+
+def get_requires(filename):
+    requirements = []
+    with open(filename, "rt") as req_file:
+        for line in req_file.read().splitlines():
+            if not line.strip().startswith("#"):
+                requirements.append(line)
+    return requirements
+
+def generate_long_description_file():
+    this_directory = path.abspath(path.dirname(__file__))
+    with open(path.join(this_directory, 'README.md')) as f:
+        long_description = f.read()
+    return long_description
 
 setup(
     name="magicdb_cli",
-    version="1.0.21",
+    version="1.0.22",
     description="magicdb client cmd tool",
     license="License :: AGPL 3",
     author="TimePi",
@@ -37,12 +49,12 @@ setup(
     url="https://github.com/uopensail/magicdb-cli",
     py_modules=["magicdb_cli"],
     keywords="magicdb client",
-    long_description=long_description,
+    long_description=generate_long_description_file(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
-    install_requires=requires_list,
+    install_requires=get_requires(path.join(here, "requirements.txt")),
     scripts=[],
     entry_points={
         'console_scripts': [
