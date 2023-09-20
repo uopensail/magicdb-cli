@@ -43,7 +43,7 @@ setup(
     name="magicdb_cli",
     version="1.0.22",
     description="magicdb client cmd tool",
-    license="License :: AGPL 3",
+    license="License :: AGLP3",
     author="TimePi",
     author_email="timepi@uopensail.com",
     url="https://github.com/uopensail/magicdb-cli",
@@ -64,7 +64,7 @@ setup(
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "License :: AGPL 3",
+        "License :: OSI Approved :: GNU Affero General Public License v3",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
