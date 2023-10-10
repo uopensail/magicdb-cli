@@ -33,8 +33,8 @@
 #  --table test_table \
 #  --key pk \
 #  --partition 100 \
-#  --data_dir oss://xxx/tmp/sqlx/data \
-#  --meta_dir oss://xxx/tmp/sqlx/meta \
+#  --data_dir oss://xxx/tmp/db/data \
+#  --meta_dir oss://xxx/tmp/db/meta \
 #  --cmd "/opt/apps/HADOOP-COMMON/hadoop-common-current/bin/hadoop fs -put -f %s %s"
 
 
