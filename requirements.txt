@@ -1,6 +1,4 @@
-grpcio==1.27.1
 mmh3 == 3.0.0
-numpy == 1.21.0
 pandas == 1.2.0
 pyarrow == 6.0.1
 antlr4-python3-runtime == 4.12

@@ -41,7 +41,8 @@ def generate_long_description_file():
 
 setup(
     name="magicdb_cli",
-    version="1.0.22",
+    version="1.0.23",
+    python_requires='>=3.7',
     description="magicdb client cmd tool",
     license="License :: AGLP3",
     author="TimePi",
@@ -66,10 +67,10 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development :: Libraries",
         "Topic :: Utilities",
     ],

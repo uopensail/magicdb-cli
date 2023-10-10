@@ -15,7 +15,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Affero General Public License for more details.
 #
-
+import os
 import argparse
 import atexit
 import cmd
@@ -23,6 +23,8 @@ import os.path
 import readline
 import sys
 import traceback
+
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"]="python"
 
 import etcd3
 
